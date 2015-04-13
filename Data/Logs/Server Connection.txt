@@ -1,2 +1,0 @@
-** Host started on port: 25000 **
-** Host disconnected **
