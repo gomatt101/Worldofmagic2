@@ -1,0 +1,74 @@
+Function Main()
+
+	Player = Actor()
+	D = OpenDialog(Player, ContextActor(), "Fat Ivan's Magic Shop")
+		DialogOutput(Player, D, "Welcome to my shop! And what may I do for you?", 255, 255, 255)
+		Result = DialogInput(Player, D, "Magic skill increase (10 gp)", "Mana boost (2 gp)", "Healing spell (15 gp)", "Charm creature spell (5 gp)", "Speed! (5 gp)", "Trade", "Nothing, goodbye")
+		If (Result == 1)
+			If (Gold(Player) > 9)
+				ChangeGold(Player, -10)
+				SetAttribute(Player, "Magic", Attribute(Player, "Magic") + 2)
+				DialogOutput(Player, D, "Attribute increased!", 255, 255, 255)
+				ScreenFlash(Player, 255, 255, 255, 255, 1000)
+			Else
+				DialogOutput(Player, D, "You do not have enough gold!", 255, 255, 255)
+			EndIf
+		ElseIf (Result == 2)
+			If (Gold(Player) > 1)
+				CurrentLevel = Attribute(Player, "Mana")
+				If (CurrentLevel < MaxAttribute(Player, "Mana"))
+					ChangeGold(Player, -2)
+					SetAttribute(Player, "Mana", CurrentLevel + 1)
+					DialogOutput(Player, D, "Mana restored!", 255, 255, 255)
+				Else
+					DialogOutput(Player, D, "Your mana is already full...", 255, 255, 255)
+				EndIf
+			Else
+				DialogOutput(Player, D, "You do not have enough gold!", 255, 255, 255)
+			EndIf
+		ElseIf (Result == 3)
+			If (Gold(Player) > 14)
+				If (Attribute(Player, "Magic") > 9)
+					ChangeGold(Player, -15)
+					AddAbility(Player, "Heal Self", 1)
+					DialogOutput(Player, D, "Spell learned!", 255, 255, 255)
+				Else
+					DialogOutput(Player, D, "Sorry, your magic skill is not high enough.", 255, 255, 255)
+				EndIf
+			Else
+				DialogOutput(Player, D, "You do not have enough gold!", 255, 255, 255)
+			EndIf
+		ElseIf (Result == 4)
+			If (Gold(Player) > 4)
+				If (Attribute(Player, "Magic") > 4)
+					ChangeGold(Player, -5)
+					AddAbility(Player, "Charm Creature", 1)
+					DialogOutput(Player, D, "Spell learned!", 255, 255, 255)
+				Else
+					DialogOutput(Player, D, "Sorry, your magic skill is not high enough.", 255, 255, 255)
+				EndIf
+			Else
+				DialogOutput(Player, D, "You do not have enough gold!", 255, 255, 255)
+			EndIf
+		ElseIf (Result == 5)
+			If (Gold(Player) > 4)
+				ChangeGold(Player, -5)
+				AddActorEffect(Player, "Speed!", "Speed", 15, 30, 131)
+				ScreenFlash(Player, 255, 50, 50, 255, 1000)
+				DialogOutput(Player, D, "Vrrrrooooom!", 255, 50, 50)
+			Else
+				DialogOutput(Player, D, "You do not have enough gold!", 255, 255, 255)
+			EndIf
+		ElseIf (Result == 6)
+			OpenTrading(Player, ContextActor())
+			DialogOutput(Player, D, "Thanks for coming!", 255, 255, 255)
+		ElseIf (Result == 7)
+			CloseDialog(Player, D)
+			Return()
+		EndIf
+		DialogInput(Player, D, "Goodbye...")
+	CloseDialog(Player, D)
+
+	Return()
+
+End Function

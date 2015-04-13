@@ -1,0 +1,40 @@
+ 
+//Script to equip new players with basic equipment based on their class.
+
+Function Main()
+
+	Player = Actor()
+	
+	//Check to see if Player is new.
+	SetupPlayer = ActorGlobal(Player, 1)
+
+
+	If (SetupPlayer < 1)
+		//If New add flag
+		SetActorGlobal(Player, 1, 1)
+		//Check Player Class
+		PlayerClass = Class(Player)
+			If (PlayerClass $= "Fighter")
+				//Give Fighter stuff
+				GiveXP(Player, 200)
+				GiveItem(Player, "Forge Hammer", 1)
+				GiveItem(Player, "Razor Mace", 1)
+				GiveItem(Player, "Leather Shirt", 1)
+				GiveItem(Player, "Odd Mushroom", 4)
+				GiveItem(Player, "Beer", 11)
+			Else If (PlayerClass $= "Mage")
+				//Give Mage stuff
+				GiveItem(Player, "Forge Hammer", 1)
+				GiveItem(Player, "Razor Mace", 1)
+				GiveItem(Player, "Leather Shirt", 1)
+				GiveItem(Player, "Odd Mushroom", 4)
+				GiveItem(Player, "Beer", 11)
+			Endif
+			// Etc, etc
+	Endif
+ 
+ 
+
+	Return()
+
+End Function

@@ -1,0 +1,10 @@
+// Script for the heal others ability
+// Restores 5-10 health to nearby friendly actors
+
+Function Main()
+
+	Player = Actor()
+
+	Return()
+
+End Function

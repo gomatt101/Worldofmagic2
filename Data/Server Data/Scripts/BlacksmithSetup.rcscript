@@ -1,0 +1,12 @@
+Function Main()
+
+	GiveItem(Actor(), "Forge Hammer", 1)
+	GiveItem(Actor(), "questionmark", 1)
+	GiveItem(Actor(), "Razor Mace", 2)
+	GiveItem(Actor(), "Leather Shirt", 1)
+	GiveItem(Actor(), "Odd Mushroom", 4)
+	GiveItem(Actor(), "Beer", 11)
+	SetName(Actor(), "Thoreg")
+	Return()
+
+End Function

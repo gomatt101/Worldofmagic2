@@ -1,0 +1,32 @@
+// Script for the heal self ability
+// Restores 5-10 health to the actor
+
+Function Main()
+
+	Player = Actor()
+
+	// Mana check
+	ManaLevel = Attribute(Player, "Mana")
+	If (ManaLevel < 1)
+		Output(Player, "Insufficient mana - spell failed!")
+		Return()
+	EndIf
+	SetAttribute(Player, "Mana", ManaLevel - 1)
+
+	// Particles and casting animation
+	AnimateActor(Player, "Magic Cast", 0.05, 1)
+	CreateEmitter(Player, "HealthSpell", 15, 1000)
+	DoEvents(1000)
+
+	// Add health
+	Health = Attribute(Player, "Health") + Rand(5, 10)
+	Max = MaxAttribute(Player, "Health")
+	If (Health > Max)
+		Health = Max
+	EndIf
+	SetAttribute(Player, "Health", Health)
+
+	// Done
+	Return()
+
+End Function

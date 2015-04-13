@@ -1,0 +1,9 @@
+// Script for the magical fireworks ability
+// Creates particles effect around the Actor and plays a sound
+
+Function Main()
+
+	Player = Actor()
+	Return()
+
+End Function

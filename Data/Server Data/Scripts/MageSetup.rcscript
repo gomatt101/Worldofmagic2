@@ -1,0 +1,7 @@
+Function Main()
+
+	GiveItem(Actor(), "Staff of the Mage", 1)
+	SetName(Actor(), "Gnome")
+	Return()
+
+End Function

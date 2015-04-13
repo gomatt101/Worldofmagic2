@@ -1,0 +1,45 @@
+// Script for the charm creature ability
+// Makes your target into your pet for 60 seconds
+
+Function Main()
+
+	Player = Actor()
+	Target = ContextActor()
+
+	// Check target is valid
+	If (Target == 0)
+		Output(Player, "Select a target for the spell!")
+		Return()
+	EndIf
+	If (ActorIsHuman(Target))
+		Output(Player, "Human players cannot be charmed!")
+		Return()
+	EndIf
+
+	// Mana check
+	ManaLevel = Attribute(Player, "Mana")
+	If (ManaLevel < 3)
+		Output(Player, "Insufficient mana - spell failed!")
+		Return()
+	EndIf
+	SetAttribute(Player, "Mana", ManaLevel - 3)
+
+	// Particles and casting animation
+	AnimateActor(Player, "Magic Cast", 0.05, 1)
+	CreateEmitter(Player, "HealthSpell", 15, 1000)
+	DoEvents(1000)
+
+	// Capture target
+	OldLeader = ActorLeader(Target)
+	SetLeader(Target, Player)
+
+	// Restore target
+	Persistent(1)
+	DoEvents(60000)
+	SetLeader(Target, OldLeader)
+
+	// Done
+	Return()
+
+End Function
+
